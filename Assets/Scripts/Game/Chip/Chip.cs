@@ -9,8 +9,17 @@ public class Chip : MonoBehaviour, IMoveable
     public POOL_TYPE poolType;
     public int GetValue() => value;
 
+    private bool isAdded = false;
+
     public void MoveStart()
     {
+        if (isAdded)
+        {
+            BetManager.Instance.RemoveChip(this);
+            isAdded = false;
+            return;
+        }
+
         ChipManager.Instance.CollectChip(poolType);
     }
     public void Move(Vector3 pos)
@@ -22,12 +31,14 @@ public class Chip : MonoBehaviour, IMoveable
 
     public void MoveEnd(Vector3 pos)
     {
-        SetBetArea(pos);
+      //  SetBetArea(pos);
 
         if(betArea != null)
         {
+            isAdded = true;
             transform.position = betArea.transform.position.With(z: 0f);
-           
+            BetManager.Instance.AddChip(this);
+            ChipManager.Instance.ControlSlotMoneyValue();
         }
         else
         {
@@ -50,19 +61,23 @@ public class Chip : MonoBehaviour, IMoveable
             yield return null;
         }
         transform.position = targetPos;
+        ChipManager.Instance.BehindChip(poolType);
         gameObject.SetActive(false);
     }
-
 
     private void SetBetArea(Vector3 pos)
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(pos, Vector3.forward, out hit, 100f))
+        if (Physics.Raycast(pos, Vector3.forward, out hit, 100f, ChipManager.Instance.BetAreaLayer))
         {
             this.betArea = hit.collider.gameObject.GetComponent<BetArea>();
-            return;
+
+            if (hit.collider.gameObject.GetComponent<OutSideArea>())
+            {
+                this.betArea = null;
+                TableHighlighter.Instance.OnObjectExit();
+            }
         }
-        this.betArea = null;
     }
 }

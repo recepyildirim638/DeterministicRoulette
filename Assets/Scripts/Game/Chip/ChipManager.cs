@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,38 +6,75 @@ using UnityEngine;
 public class ChipManager : MonoSingleton<ChipManager>
 {
     public ChipSlot[] chipSlot;
+    public LayerMask BetAreaLayer;
 
+    [SerializeField] GameObject[] creatChips;
+    
     private void Start()
     {
-        CreateChips(120);
+        creatChips = new GameObject[chipSlot.Length];
+        CreateChips();
     }
 
-    private int GetPlayerCoinCount() => 132;
+    private int GetPlayerCoinCount() => MoneyManager.Instance.GetMoneyCount();
 
     public void CollectChip(POOL_TYPE type)
     {
-        for (int i = 0; i < chipSlot.Length; i++)
-        {
-            if (chipSlot[i].value > GetPlayerCoinCount()) continue;
+        creatChips[(int)type] = null;
+ 
+        CreateChip(type);
+    }
 
-            if (chipSlot[i].poolType == type)
+    public void BehindChip(POOL_TYPE type)
+    {
+       
+        for (int i = 0; i < creatChips.Length; i++)
+        {
+            if (creatChips[i] == null)
             {
-                GameObject chip = PoolManager.Instance.GetPoolItem(chipSlot[i].poolType);
-                chip.transform.position = chipSlot[i].GetPosition();
+                CreateChip(chipSlot[i].poolType);
             }
         }
     }
 
-    public void CreateChips(int playerCoinCount)
+    public void CreateChips()
     {
         for (int i = 0; i < chipSlot.Length; i++)
         {
-            if (chipSlot[i].value > playerCoinCount) continue;
-
-            GameObject chip = PoolManager.Instance.GetPoolItem(chipSlot[i].poolType);
-            chip.transform.position = chipSlot[i].GetPosition();
+            CreateChip(chipSlot[i].poolType);
         }
     }
+
+    public void ControlSlotMoneyValue()
+    {
+        int price = GetPlayerCoinCount();
+
+        for (int i = 0; i < chipSlot.Length; i++)
+        {
+            if (creatChips[i] == null)
+                continue;
+
+            if (chipSlot[i].value > price)
+            {
+                creatChips[i].gameObject.SetActive(false);
+                creatChips[i] = null;
+            }
+        }
+    }
+
+    private void CreateChip(POOL_TYPE type) 
+    {
+        int index = (int)type;
+
+        if (chipSlot[index].value > GetPlayerCoinCount()) 
+            return;
+
+        GameObject chip = PoolManager.Instance.GetPoolItem(chipSlot[index].poolType);
+        chip.transform.position = chipSlot[index].GetPosition();
+        creatChips[index] = chip;
+    }
+
+
 
     public Vector3 GetChipSlotPos(int index) => chipSlot[index].GetPosition();
 }

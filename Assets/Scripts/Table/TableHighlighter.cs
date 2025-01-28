@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
 
 public class TableHighlighter : MonoSingleton<TableHighlighter>
 {
-    public TableNumber [] numberList;
+    public TableNumber[] numberList;
 
     private BetArea _lastHighlightObject;
+
+
+    [SerializeField] BetTypeUI betTypeUI;
 
     public void Hover(BetArea refObject)
     {
@@ -18,6 +22,7 @@ public class TableHighlighter : MonoSingleton<TableHighlighter>
 
         OnObjectHover(refObject);
         _lastHighlightObject = refObject;
+        betTypeUI.SetBetTypeText(refObject);
     }
 
     public void OnObjectHover(BetArea refObject)
@@ -28,6 +33,9 @@ public class TableHighlighter : MonoSingleton<TableHighlighter>
 
     public void OnObjectExit()
     {
+        if (_lastHighlightObject == null)
+            return;
+
         for (int i = 0; i < _lastHighlightObject.winNumbers.Length; i++)
             SearhTableNumber(_lastHighlightObject.winNumbers[i])?.SetActive(false);
     }
