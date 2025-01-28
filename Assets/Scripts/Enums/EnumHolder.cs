@@ -14,3 +14,12 @@ public enum BetType
     DOZEN,
     COLUMNS
 }
+
+public enum POOL_TYPE
+{
+    CHIP_1 = 0,
+    CHIP_5 = 1,
+    CHIP_10 = 2,
+    CHIP_50 = 3,
+    CHIP_100 = 4
+}
