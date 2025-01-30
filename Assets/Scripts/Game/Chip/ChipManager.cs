@@ -70,6 +70,7 @@ public class ChipManager : MonoSingleton<ChipManager>
             return;
 
         GameObject chip = PoolManager.Instance.GetPoolItem(chipSlot[index].poolType);
+        chip.transform.parent = transform;
         chip.transform.position = chipSlot[index].GetPosition();
         creatChips[index] = chip;
     }

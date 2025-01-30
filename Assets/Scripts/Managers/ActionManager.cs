@@ -10,4 +10,5 @@ public class ActionManager
     public static Action<int> ChangeBetValue { get; set;}
 
     public static Action<int> ChangeMoneyValue{ get; set; }
+    public static Action<byte> SelectResultNumber { get; set; }
 }

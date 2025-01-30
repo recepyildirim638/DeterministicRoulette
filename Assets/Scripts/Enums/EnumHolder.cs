@@ -23,3 +23,9 @@ public enum POOL_TYPE
     CHIP_50 = 3,
     CHIP_100 = 4
 }
+
+public enum GameStatus
+{
+    BETTING,
+    WHELLING
+}

@@ -38,6 +38,8 @@ public class TableHighlighter : MonoSingleton<TableHighlighter>
 
         for (int i = 0; i < _lastHighlightObject.winNumbers.Length; i++)
             SearhTableNumber(_lastHighlightObject.winNumbers[i])?.SetActive(false);
+
+        betTypeUI.ClearText();
     }
 
 

@@ -4,20 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpinButtonUI : MonoBehaviour
+public class SpinButtonUI : BaseButton
 {
-    Button spinButton;
-
-    private void Start()
-    {
-        spinButton = GetComponent<Button>();
-        spinButton.onClick.AddListener(() => Spin());
-        spinButton.interactable = false;
-    }
-
     private void Spin()
     {
-        
+        SetButtonInteractive(false);
+        GameManager.Instance.StartSpin();
+    }
+
+    public override void BaseStart()
+    {
+        SetButtonInteractive(false);
     }
 
     private void OnEnable()
@@ -33,8 +30,13 @@ public class SpinButtonUI : MonoBehaviour
     private void Action_ChangeBetValue(int val)
     {
         if (val <= 0)
-            spinButton.interactable = false;
-        else 
-            spinButton.interactable = true;
+            SetButtonInteractive(false);
+        else
+            SetButtonInteractive(true);
+    }
+
+    public override void ButtonOnClick()
+    {
+        Spin();
     }
 }

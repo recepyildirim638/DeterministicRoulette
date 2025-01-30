@@ -12,5 +12,12 @@ public class BetTypeUI : MonoBehaviour
         string winNumbersText = string.Join(", ", refObject.winNumbers); 
         betCountTextUI.text = refObject.BetType.ToString() + ": " + winNumbersText;
     }
-   
+
+
+    public void ClearText()
+    {
+
+        betCountTextUI.text = "";
+    }
+
 }
