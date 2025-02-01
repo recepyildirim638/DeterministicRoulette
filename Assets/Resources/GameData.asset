@@ -17,27 +17,45 @@ MonoBehaviour:
     sound: 1
     vibration: 1
   playerData:
-    moneyCount: 1330
+    moneyCount: 4460
   spinData:
-  - winNumber: 13
-    totalBet: 10
-    wonMoney: 360
+  - winNumber: 7
+    totalBet: 100
+    wonMoney: 3600
     gameType: 0
     data:
-    - betValue: 10
+    - betValue: 100
       betType: 0
-      numbers: 0d
-  - winNumber: 6
-    totalBet: 20
-    wonMoney: 0
+      numbers: 07
+  - winNumber: 19
+    totalBet: 380
+    wonMoney: 240
     gameType: 0
     data:
-    - betValue: 5
-      betType: 3
-      numbers: 08090b0c
-    - betValue: 5
+    - betValue: 100
+      betType: 0
+      numbers: 07
+    - betValue: 10
       betType: 3
       numbers: 07080a0b
-    - betValue: 10
+    - betValue: 5
+      betType: 1
+      numbers: 1415
+    - betValue: 50
       betType: 11
       numbers: 0d0e0f101112131415161718
+    - betValue: 100
+      betType: 1
+      numbers: 221f
+    - betValue: 50
+      betType: 0
+      numbers: 1d
+    - betValue: 50
+      betType: 12
+      numbers: 0306090c0f1215181b1e2124
+    - betValue: 5
+      betType: 1
+      numbers: 0d10
+    - betValue: 10
+      betType: 3
+      numbers: 13141011
