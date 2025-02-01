@@ -17,6 +17,8 @@ public class GameManager : MonoSingleton<GameManager>
     [Header("Game")]
     [SerializeField] public GameLevel gameLevel;
 
+
+    // The initial loading phase of the game, loading necessary managers.
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -33,6 +35,8 @@ public class GameManager : MonoSingleton<GameManager>
         moveManager.Initalize();
     }
 
+
+
     public void StartSpin()
     {
         GAME_STATUS = GameStatus.WHELLING;
@@ -42,6 +46,7 @@ public class GameManager : MonoSingleton<GameManager>
         gameLevel.BetTable.SetActive(false);
         gameLevel.rouletteTableManager.StartWhelling();
     }
+
 
     public void Betting()
     {

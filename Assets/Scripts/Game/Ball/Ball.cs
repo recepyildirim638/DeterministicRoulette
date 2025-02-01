@@ -35,11 +35,6 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.A))
-        {
-            StartWheel();
-        }
-
         if (isDump)
             return;
 
@@ -52,8 +47,8 @@ public class Ball : MonoBehaviour
 
         transform.localPosition = new Vector3(x, y, z);
 
-       
-        
+
+        // The ball falls onto the table after dropping below a certain speed.
         if (speed < 1.3f)
         {
             Vector2 center = centerArea.position.ToVector2();
@@ -73,9 +68,9 @@ public class Ball : MonoBehaviour
         }
     }
 
+    // Is the ball aligned with the target number?  
     bool GetCenterDirection(Vector2 center, Vector2 A, Vector2 B)
     {
-
         Vector2 dirA = A - center;
         Vector2 dirB = B - center;
 
@@ -109,9 +104,11 @@ public class Ball : MonoBehaviour
             return false;
     }
 
+    // The process of the ball landing on the designated number on the table.
     IEnumerator JumpToGo(Vector3 targetPos, float height, float moveSpeed)
     {
-    
+
+        // The ball bounces three times while moving towards the area it will land in.
         for (int i = 0; i < 3; i++)
         {
             Vector3 startPos = transform.position;

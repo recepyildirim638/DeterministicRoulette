@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// All used chips are managed here and retrieved from the pool manager.
 public class ChipManager : MonoBehaviour
 {
     public ChipSlot[] chipSlot;

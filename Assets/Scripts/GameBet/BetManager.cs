@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
+
+// All bets are gathered here, and the winnings are calculated after pressing the spin button.
 public class BetManager : MonoBehaviour
 {
     List<Chip> BetChipList = new List<Chip>();
