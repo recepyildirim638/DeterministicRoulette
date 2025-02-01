@@ -17,13 +17,27 @@ MonoBehaviour:
     sound: 1
     vibration: 1
   playerData:
-    moneyCount: 990
+    moneyCount: 1330
   spinData:
-  - winNumber: 18
+  - winNumber: 13
     totalBet: 10
-    wonMoney: 0
+    wonMoney: 360
     gameType: 0
     data:
     - betValue: 10
-      betType: 2
-      numbers: 161718
+      betType: 0
+      numbers: 0d
+  - winNumber: 6
+    totalBet: 20
+    wonMoney: 0
+    gameType: 0
+    data:
+    - betValue: 5
+      betType: 3
+      numbers: 08090b0c
+    - betValue: 5
+      betType: 3
+      numbers: 07080a0b
+    - betValue: 10
+      betType: 11
+      numbers: 0d0e0f101112131415161718
