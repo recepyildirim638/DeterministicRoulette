@@ -111,7 +111,7 @@ public class Ball : MonoBehaviour
 
     IEnumerator JumpToGo(Vector3 targetPos, float height, float moveSpeed)
     {
-        Debug.Break();
+    
         for (int i = 0; i < 3; i++)
         {
             Vector3 startPos = transform.position;
