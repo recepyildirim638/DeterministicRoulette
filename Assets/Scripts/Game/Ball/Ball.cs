@@ -62,12 +62,12 @@ public class Ball : MonoBehaviour
             
             if (GetCenterDirection(center, ball,t))
             {
-                Debug.Log("true");
+
                 float dumpDistance = Vector3.Distance(transform.position, target.transform.position);
                 if (dumpDistance < 2.0f)
                 {
                     isDump = true;
-                    StartCoroutine(JumpToGo(target.transform.position, 1.0f, 4f));
+                    StartCoroutine(JumpToGo(target.transform.position, 1f, 4.4f));
                 }
             }
         }
@@ -111,7 +111,8 @@ public class Ball : MonoBehaviour
 
     IEnumerator JumpToGo(Vector3 targetPos, float height, float moveSpeed)
     {
-        for (int i = 0; i < 3; i++)
+        
+        for (int i = 0; i < 4; i++)
         {
             Vector3 startPos = transform.position;
 
@@ -144,18 +145,41 @@ public class Ball : MonoBehaviour
             }
         }
 
+         float endDistance = Vector3.Distance(transform.position, target.transform.position);
+         float endTime = endDistance / moveSpeed;
+         float endElapsedTime = 0f;
 
+       // Debug.Break();
 
-        while (Vector3.Distance(transform.position, target.transform.position) > 0.01f)
+        while (endElapsedTime < endTime)
         {
-            Vector3 dir = (target.transform.position - transform.position).normalized;
-            transform.position += dir * Time.deltaTime * moveSpeed;
+
+            endElapsedTime += Time.deltaTime;
+            float t = endElapsedTime / endTime;
+
+            Vector3 newPos = Vector3.Lerp(transform.position, targetPos, t);
+
+            newPos.y += Mathf.Sin(t * Mathf.PI) * height;
+
+            transform.position = newPos;
+
             yield return null;
         }
 
 
+        //while (Vector3.Distance(transform.position, target.transform.position) > 0.1f)
+        //{
+        //    Vector3 dir = (target.transform.position - transform.position).normalized;
+        //    transform.position += dir * Time.deltaTime * moveSpeed;
+        //    yield return null;
+        //}
+
+
         transform.position = target.transform.position;
         transform.parent = target.transform;
+
+        yield return new WaitForSeconds(2f);
+        ActionManager.WheelEnd?.Invoke();
     }
 
     public Vector3 GroundPos(Vector3 startPos)

@@ -16,7 +16,12 @@ public class ChipManager : MonoSingleton<ChipManager>
         CreateChips();
     }
 
-    private int GetPlayerCoinCount() => MoneyManager.Instance.GetMoneyCount();
+    public void Initalize()
+    {
+        CreateChips();
+    }
+
+    private int GetPlayerCoinCount() => GameManager.Instance.moneyManager.GetMoneyCount();
 
     public void CollectChip(POOL_TYPE type)
     {

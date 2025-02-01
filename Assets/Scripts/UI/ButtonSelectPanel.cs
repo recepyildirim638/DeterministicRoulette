@@ -19,9 +19,7 @@ public class ButtonSelectPanel : MonoBehaviour
 
     private void Start()
     {
-        byte rnd = (byte) Random.Range(0, 37);
-        SeltResultNumber(rnd);
-
+        CreateResultNumber();
 
         for (byte i = 0; i < 37; i++)
         {
@@ -29,6 +27,14 @@ public class ButtonSelectPanel : MonoBehaviour
             create.GetComponent<ResultButtonUI>().SetNumber(i, GetNumberColor(i));
         }
     }
+
+    public void CreateResultNumber()
+    {
+        byte rnd = (byte)Random.Range(0, 37);
+        SeltResultNumber(rnd);
+
+    }
+
     private void OnEnable()
     {
         ActionManager.SelectResultNumber += SeltResultNumber;
@@ -54,7 +60,7 @@ public class ButtonSelectPanel : MonoBehaviour
         panel.gameObject.SetActive(false);
     }
 
-    private Color GetNumberColor(byte val)
+    public Color GetNumberColor(byte val)
     {
         if (val == 0)
             return blue;

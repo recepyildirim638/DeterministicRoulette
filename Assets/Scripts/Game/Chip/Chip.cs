@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chip : MonoBehaviour, IMoveable
 {
     [SerializeField] int value;
-    BetArea betArea = null;
+    public BetArea betArea = null;
     public POOL_TYPE poolType;
     public int GetValue() => value;
 

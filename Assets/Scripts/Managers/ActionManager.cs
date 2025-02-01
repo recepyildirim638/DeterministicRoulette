@@ -11,4 +11,5 @@ public class ActionManager
 
     public static Action<int> ChangeMoneyValue{ get; set; }
     public static Action<byte> SelectResultNumber { get; set; }
+    public static Action WheelEnd { get;  set; }
 }

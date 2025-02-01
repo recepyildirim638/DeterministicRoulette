@@ -11,4 +11,10 @@ public class RouletteTableManager : MonoBehaviour
         Roulette.gameObject.SetActive(true);
         ball.StartWheel();
     }
+
+    public void CloseWhelling()
+    {
+        Roulette.gameObject.SetActive(false);
+     
+    }
 }

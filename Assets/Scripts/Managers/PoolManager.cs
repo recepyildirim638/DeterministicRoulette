@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PoolManager : MonoSingleton<PoolManager>
@@ -34,6 +35,17 @@ public class PoolManager : MonoSingleton<PoolManager>
             return pools[0];
         else
             return pools[(int)items];
+    }
+
+    public void HideAllPool()
+    {
+        for (int i = 0; i < pools.Length; i++)
+        {
+            for(int j = 0; j <  pools[i].poolObjects.Count; j++)
+            {
+                pools[i].poolObjects[j].SetActive(false);
+            }
+        }
     }
 
 
