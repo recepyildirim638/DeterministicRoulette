@@ -27,7 +27,7 @@ public class GameWinPanel : MonoBehaviour
     public void OpenPanel()
     {
         panel.SetActive(true);
-        winAmound.text = BetManager.Instance.GetBetWonAmount().ToString();
+        winAmound.text = GameManager.Instance.gameLevel.betManager.GetBetWonAmount().ToString();
         SetNumber();
     }
 

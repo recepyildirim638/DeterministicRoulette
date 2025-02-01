@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class BetManager : MonoSingleton<BetManager>
+public class BetManager : MonoBehaviour
 {
     List<Chip> BetChipList = new List<Chip>();
 
@@ -72,7 +72,7 @@ public class BetManager : MonoSingleton<BetManager>
         spinData.winNumber = GameManager.BET_RESULT_NUMBER;
         spinData.wonMoney = BetWonAmount;
         spinData.totalBet = GetAddedChipValue();
-        spinData.gameType = GameType.EUROPA;
+        spinData.gameType = GameManager.Instance.gameLevel.GameType;
         
         for (int i = 0;i < BetChipList.Count; i++)
         {

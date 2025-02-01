@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class TableHighlighter : MonoSingleton<TableHighlighter>
+public class TableHighlighter : MonoBehaviour
 {
     public TableNumber[] numberList;
 

@@ -21,7 +21,14 @@ public class ButtonSelectPanel : MonoBehaviour
     {
         CreateResultNumber();
 
-        for (byte i = 0; i < 37; i++)
+        int numberCnt = 37;
+
+        if (GameManager.Instance.gameLevel.GameType == GameType.AMERICAN)
+        {
+            numberCnt = 38;
+        }
+
+        for (byte i = 0; i < numberCnt; i++)
         {
             GameObject create = Instantiate(resultButton, content);
             create.GetComponent<ResultButtonUI>().SetNumber(i, GetNumberColor(i));
@@ -62,7 +69,7 @@ public class ButtonSelectPanel : MonoBehaviour
 
     public Color GetNumberColor(byte val)
     {
-        if (val == 0)
+        if (val == 37 || val == 0)
             return blue;
 
         for(byte i = 0;i < redArea.winNumbers.Length;i++)

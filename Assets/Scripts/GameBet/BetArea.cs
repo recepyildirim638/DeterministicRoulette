@@ -11,6 +11,6 @@ public class BetArea : MonoBehaviour, ISelectiable
 
     public void Hover()
     {
-        TableHighlighter.Instance.Hover(this);
+        GameManager.Instance.gameLevel.tableHighlighter.Hover(this);
     }
 }

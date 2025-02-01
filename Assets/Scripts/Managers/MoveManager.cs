@@ -10,9 +10,12 @@ public class MoveManager : MonoBehaviour
 
     IMoveable moveObject;
 
-    private void Start()
+    bool isLoaded = false;
+
+    public void Initalize()
     {
-        _cam = Camera.main;
+        _cam = GameManager.Instance.gameLevel.mainCamera;
+        isLoaded = true;
     }
 
     private Vector3 GetScreenToWorldPosition()
@@ -34,6 +37,9 @@ public class MoveManager : MonoBehaviour
 
     private void Update()
     {
+        if (!isLoaded)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             SetMoveableObject();

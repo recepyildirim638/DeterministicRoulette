@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipManager : MonoSingleton<ChipManager>
+public class ChipManager : MonoBehaviour
 {
     public ChipSlot[] chipSlot;
     public LayerMask BetAreaLayer;

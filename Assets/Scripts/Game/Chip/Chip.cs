@@ -16,12 +16,12 @@ public class Chip : MonoBehaviour, IMoveable
     {
         if (isAdded)
         {
-            BetManager.Instance.RemoveChip(this);
+            GameManager.Instance.gameLevel.betManager.RemoveChip(this);
             isAdded = false;
             return;
         }
 
-        ChipManager.Instance.CollectChip(poolType);
+        GameManager.Instance.gameLevel.chipManager.CollectChip(poolType);
     }
     public void Move(Vector3 pos)
     {
@@ -38,21 +38,22 @@ public class Chip : MonoBehaviour, IMoveable
         {
             isAdded = true;
             transform.position = betArea.transform.position.With(z: 0f);
-            BetManager.Instance.AddChip(this);
-            ChipManager.Instance.ControlSlotMoneyValue();
+
+            GameManager.Instance.gameLevel.betManager.AddChip(this);
+            GameManager.Instance.gameLevel.chipManager.ControlSlotMoneyValue();
         }
         else
         {
             StartCoroutine(BackChipArea());
         }
 
-        TableHighlighter.Instance.OnObjectExit();
+         GameManager.Instance.gameLevel.tableHighlighter.OnObjectExit();
     }
 
     IEnumerator BackChipArea()
     {
         yield return null;
-        Vector3 targetPos = ChipManager.Instance.GetChipSlotPos((int)poolType);
+        Vector3 targetPos = GameManager.Instance.gameLevel.chipManager.GetChipSlotPos((int)poolType);
         Vector3 direction = targetPos - transform.position;
 
         while( direction.sqrMagnitude > 0.2f )
@@ -62,7 +63,7 @@ public class Chip : MonoBehaviour, IMoveable
             yield return null;
         }
         transform.position = targetPos;
-        ChipManager.Instance.BehindChip(poolType);
+        GameManager.Instance.gameLevel.chipManager.BehindChip(poolType);
         gameObject.SetActive(false);
     }
 
@@ -70,14 +71,14 @@ public class Chip : MonoBehaviour, IMoveable
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(pos, Vector3.forward, out hit, 100f, ChipManager.Instance.BetAreaLayer))
+        if (Physics.Raycast(pos, Vector3.forward, out hit, 100f, GameManager.Instance.gameLevel.chipManager.BetAreaLayer))
         {
             this.betArea = hit.collider.gameObject.GetComponent<BetArea>();
 
             if (hit.collider.gameObject.GetComponent<OutSideArea>())
             {
                 this.betArea = null;
-                TableHighlighter.Instance.OnObjectExit();
+                GameManager.Instance.gameLevel.tableHighlighter.OnObjectExit();
             }
         }
     }

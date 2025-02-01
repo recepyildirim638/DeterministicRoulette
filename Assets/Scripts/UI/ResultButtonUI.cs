@@ -16,7 +16,11 @@ public class ResultButtonUI : BaseButton
 
     public void SetNumber(byte number, Color color)
     {
-        numberText.text = number.ToString();
+        if(number == 37)
+            numberText.text = "00".ToString();
+        else
+            numberText.text = number.ToString();
+
         this.number = number;
         GetComponent<Image>().color = color;
     }
