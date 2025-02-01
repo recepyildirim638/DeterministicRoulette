@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameData", menuName = "ScriptableObjects/GameData", order = 2)]
@@ -9,6 +10,9 @@ public class MyGameData : ScriptableObject
     [Header("Player Data")]
     public PlayerData playerData = new PlayerData();
 
+    [Header("Statistic Data")]
+    public List<SpinData> spinData = new List<SpinData>();
+
 
 
     [ContextMenu("ResetData")]
@@ -19,7 +23,8 @@ public class MyGameData : ScriptableObject
         mainData.music = true;
 
 
-        playerData.moneyCount = 0;
+        playerData.moneyCount = 1000;
+        spinData.Clear();
 
 
         PlayerPrefs.DeleteAll();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BaseGameData : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class BaseGameData : MonoBehaviour
     [Header("Behaviour")]
     protected MainData mainData;
     protected PlayerData playerData;
-
+    protected List<SpinData> spinData;
 
 
     protected void LoadGameData()
@@ -17,6 +18,7 @@ public class BaseGameData : MonoBehaviour
 
         mainData = gameData.mainData;
         playerData = gameData.playerData;
+        spinData = gameData.spinData;
 
 
     }
@@ -24,7 +26,7 @@ public class BaseGameData : MonoBehaviour
     {
         gameData.playerData = playerData;
         gameData.mainData = mainData;
-
+        gameData.spinData = spinData;
 
         SaveManager.SaveGameData(gameData);
     }

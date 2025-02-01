@@ -29,3 +29,9 @@ public enum GameStatus
     BETTING,
     WHELLING
 }
+
+public enum GameType
+{
+    EUROPA,
+    AMERICAN
+}

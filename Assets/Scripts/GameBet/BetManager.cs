@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class BetManager : MonoSingleton<BetManager>
@@ -26,6 +27,12 @@ public class BetManager : MonoSingleton<BetManager>
     private void OnDisable()
     {
         ActionManager.WheelEnd -= WheelEndFunc;
+    }
+
+    public async void CalculateBetResultBalance()
+    {
+        await CalculateBetResultBalanceAsync();
+        AddStatistic();
     }
 
     private void WheelEndFunc()
@@ -57,28 +64,44 @@ public class BetManager : MonoSingleton<BetManager>
         return value;
     }
 
-    public void CalculateBetResultBalance()
+   
+
+    private void AddStatistic()
     {
-       StartCoroutine(CalculateBetResultBalanceEnumerator());
+        SpinData spinData = new SpinData();
+        spinData.winNumber = GameManager.BET_RESULT_NUMBER;
+        spinData.wonMoney = BetWonAmount;
+        spinData.totalBet = GetAddedChipValue();
+        spinData.gameType = GameType.EUROPA;
+        
+        for (int i = 0;i < BetChipList.Count; i++)
+        {
+            BetSpinData betData = new();
+            betData.betValue = BetChipList[i].GetValue();
+            betData.betType = BetChipList[i].betArea.BetType;
+            betData.numbers = BetChipList[i].betArea.winNumbers;
+            spinData.data.Add(betData);
+        }
+
+        GameManager.Instance.dataManager.AddStatisticData(spinData);
+
     }
 
-    IEnumerator CalculateBetResultBalanceEnumerator()
+   
+
+    async Task CalculateBetResultBalanceAsync()
     {
         int wonMoney = 0;
 
         for (int i = 0; i < BetChipList.Count; i++)
         {
-            
             if (IsWinNumber(BetChipList[i].betArea.winNumbers))
             {
                 wonMoney += (BetChipList[i].GetValue() * (36 / BetChipList[i].betArea.winNumbers.Length));
             }
-            yield return null;
+            await Task.Yield();
         }
-
         BetWonAmount = wonMoney;
-
-
     }
 
     private bool IsWinNumber(byte[] numberList)

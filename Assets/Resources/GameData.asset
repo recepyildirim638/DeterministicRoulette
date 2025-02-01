@@ -13,8 +13,17 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   mainData:
-    music: 0
-    sound: 0
-    vibration: 0
+    music: 1
+    sound: 1
+    vibration: 1
   playerData:
-    moneyCount: 1000
+    moneyCount: 990
+  spinData:
+  - winNumber: 18
+    totalBet: 10
+    wonMoney: 0
+    gameType: 0
+    data:
+    - betValue: 10
+      betType: 2
+      numbers: 161718

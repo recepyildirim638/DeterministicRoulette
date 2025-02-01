@@ -23,7 +23,7 @@ public class WhellEndPanelManager : MonoBehaviour
 
     private void WhellEndFunc()
     {
-        if(BetManager.Instance.GetBetWonAmount() > 0)
-            winPanel.OpenPanel();
+        winPanel.OpenPanel();
+
     }
 }

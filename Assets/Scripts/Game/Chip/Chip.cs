@@ -7,6 +7,7 @@ public class Chip : MonoBehaviour, IMoveable
     [SerializeField] int value;
     public BetArea betArea = null;
     public POOL_TYPE poolType;
+
     public int GetValue() => value;
 
     private bool isAdded = false;

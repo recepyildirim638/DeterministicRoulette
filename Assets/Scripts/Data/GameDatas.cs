@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +21,24 @@ public class PlayerData
 {
     [Header("PLAYER DATA")]
     public int moneyCount;
-  
 }
 
 
+
+[Serializable]
+public class SpinData
+{
+    public byte winNumber;
+    public int totalBet;
+    public int wonMoney;
+    public GameType gameType;
+    public List<BetSpinData> data = new List<BetSpinData>();
+}
+
+[Serializable]
+public class BetSpinData
+{
+    public int betValue;
+    public BetType betType;
+    public byte[] numbers;
+}
