@@ -67,7 +67,7 @@ public class Ball : MonoBehaviour
                 if (dumpDistance < 2.0f)
                 {
                     isDump = true;
-                    StartCoroutine(JumpToGo(target.transform.position, 1f, 4.4f));
+                    StartCoroutine(JumpToGo(target.transform.position, 1f, 8f));
                 }
             }
         }
@@ -111,8 +111,8 @@ public class Ball : MonoBehaviour
 
     IEnumerator JumpToGo(Vector3 targetPos, float height, float moveSpeed)
     {
-        
-        for (int i = 0; i < 4; i++)
+        Debug.Break();
+        for (int i = 0; i < 3; i++)
         {
             Vector3 startPos = transform.position;
 
@@ -149,7 +149,7 @@ public class Ball : MonoBehaviour
          float endTime = endDistance / moveSpeed;
          float endElapsedTime = 0f;
 
-       // Debug.Break();
+
 
         while (endElapsedTime < endTime)
         {
@@ -167,12 +167,6 @@ public class Ball : MonoBehaviour
         }
 
 
-        //while (Vector3.Distance(transform.position, target.transform.position) > 0.1f)
-        //{
-        //    Vector3 dir = (target.transform.position - transform.position).normalized;
-        //    transform.position += dir * Time.deltaTime * moveSpeed;
-        //    yield return null;
-        //}
 
 
         transform.position = target.transform.position;
